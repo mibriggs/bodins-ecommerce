@@ -1,7 +1,13 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     import bodinsLogo from '$lib/assets/bodins-logo.svg';
     import profileIcon from '$lib/assets/profile-icon.svg';
     import cartIcon from '$lib/assets/cart-icon.svg';
+
+    const handleNavigation = (route: string) => {
+        goto(`/${route}`);
+    };
+
 </script>
 
 <header class="layout-header" >
@@ -17,19 +23,28 @@
         </div>
         
         <div class="nav-icons">
-            <img src={profileIcon} alt="Profile" />
-            <img src={cartIcon} alt="Checkout cart" />
+            <button on:click={() => handleNavigation('profile')}>
+                <img src={profileIcon} alt="Profile" />
+            </button>
+            <button on:click={() => handleNavigation('cart')}>
+                <img src={cartIcon} alt="Checkout cart" />
+            </button>
         </div>
     </div>
 </header>
 
 <slot />
 
+<!-- //? I need to figure out how to fix this to the bottom of the screen -->
 <footer>
-    <h1 class="layout-footer" >Footer</h1>
+    <h1 class="layout-footer" >Super Cool Footer</h1>
 </footer>
 
 <style>
+    :global(body) {
+        background-color: #F1F7EE;
+    }
+
     .layout-header {
         /* background-color: #F1F7EE; */
         border-radius: 0px 0px 10px 10px;
@@ -37,10 +52,6 @@
         /* position: fixed; */
         /* top: 0; */
         width: 100%;
-    }
-
-    :global(body) {
-        background-color: #F1F7EE;
     }
 
     .nav-body {
@@ -73,5 +84,10 @@
         text-decoration: underline;
         text-decoration-color: #48AC54;
         text-decoration-thickness: 3px;
+    }
+
+    button {
+        background-color: transparent;
+        border-width: 0;
     }
 </style>
